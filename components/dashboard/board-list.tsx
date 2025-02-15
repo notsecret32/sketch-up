@@ -14,12 +14,15 @@ interface BoardListProps {
   organizationId: string;
   query: {
     search?: string;
-    favorites?: boolean;
+    favorites?: string;
   };
 }
 
 export const BoardList = ({ organizationId, query }: BoardListProps) => {
-  const data = useQuery(api.boards.get, { organizationId: organizationId });
+  const data = useQuery(api.boards.get, {
+    organizationId: organizationId,
+    favorites: query.favorites,
+  });
 
   if (data === undefined) {
     return (
@@ -67,7 +70,7 @@ export const BoardList = ({ organizationId, query }: BoardListProps) => {
             createdAt={board._creationTime}
             imageUrl={board.imageUrl}
             organizationId={board.organizationId}
-            isFavorite={false}
+            isFavorite={board.isFavorite}
           />
         ))}
       </div>

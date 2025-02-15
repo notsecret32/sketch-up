@@ -8,7 +8,7 @@ interface FooterProps {
   createdAtLabel: string;
   isFavorite: boolean;
   disabled: boolean;
-  onClick: () => void;
+  onFavorite: () => void;
 }
 
 export const Footer = ({
@@ -17,8 +17,15 @@ export const Footer = ({
   createdAtLabel,
   isFavorite,
   disabled,
-  onClick,
+  onFavorite,
 }: FooterProps) => {
+  const onFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    onFavorite();
+  };
+
   return (
     <div className='relative bg-white p-3'>
       <p className='text-[13px] truncate max-w-[calc(100%-20px)]'>{title}</p>
@@ -27,7 +34,7 @@ export const Footer = ({
       </p>
       <button
         disabled={disabled}
-        onClick={onClick}
+        onClick={onFavoriteClick}
         className={cn(
           'opacity-0 group-hover:opacity-100 transition absolute top-3 right-3 text-muted-foreground hover:text-blue-600',
           disabled && 'cursor-not-allowed opacity-75'
