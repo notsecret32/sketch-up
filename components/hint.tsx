@@ -1,3 +1,4 @@
+import { TooltipContentProps } from '@radix-ui/react-tooltip';
 import {
   Tooltip,
   TooltipContent,
@@ -7,11 +8,11 @@ import {
 
 export interface HintProps {
   label: string;
-  side?: 'top' | 'bottom' | 'left' | 'right';
-  sideOffset?: number;
-  align?: 'start' | 'center' | 'end';
-  alignOffset?: number;
   children: React.ReactNode;
+  side?: TooltipContentProps['side'];
+  sideOffset?: TooltipContentProps['sideOffset'];
+  align?: TooltipContentProps['align'];
+  alignOffset?: TooltipContentProps['alignOffset'];
 }
 
 export const Hint = ({
