@@ -6,6 +6,7 @@ import { query } from './_generated/server';
 export const get = query({
   args: {
     organizationId: v.string(),
+    search: v.optional(v.string()),
     favorites: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
@@ -33,13 +34,25 @@ export const get = query({
       return boards.map(board => ({ ...board, isFavorite: true }));
     }
 
-    const boards = await ctx.db
-      .query('boards')
-      .withIndex('by_organization', query =>
-        query.eq('organizationId', args.organizationId)
-      )
-      .order('desc')
-      .collect();
+    const title = args.search as string;
+    let boards = [];
+
+    if (title) {
+      boards = await ctx.db
+        .query('boards')
+        .withSearchIndex('search_title', query =>
+          query.search('title', title).eq('organizationId', args.organizationId)
+        )
+        .collect();
+    } else {
+      boards = await ctx.db
+        .query('boards')
+        .withIndex('by_organization', query =>
+          query.eq('organizationId', args.organizationId)
+        )
+        .order('desc')
+        .collect();
+    }
 
     const boardsWithFavoriteRelation = boards.map(board => {
       return ctx.db
