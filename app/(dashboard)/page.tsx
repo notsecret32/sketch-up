@@ -8,7 +8,7 @@ import { EmptyOrganization } from '@/components/dashboard/empty-organization';
 interface DashboardPageProps {
   searchParams: {
     search: string;
-    favorites: boolean;
+    favorites: string;
   };
 }
 
