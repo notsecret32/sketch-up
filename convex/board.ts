@@ -25,3 +25,46 @@ export const create = mutation({
     return board;
   },
 });
+
+export const update = mutation({
+  args: {
+    id: v.id('boards'),
+    title: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Unauthorized');
+    }
+
+    const title = args.title.trim();
+
+    if (!title) {
+      throw new Error('Title is required');
+    }
+
+    if (title.length > 60) {
+      throw new Error('Title cannot be larger than 60 characters');
+    }
+
+    await ctx.db.patch(args.id, { title });
+  },
+});
+
+export const remove = mutation({
+  args: {
+    id: v.id('boards'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Unauthorized');
+    }
+
+    // TODO: Check to delete favorite relationship
+
+    await ctx.db.delete(args.id);
+  },
+});
