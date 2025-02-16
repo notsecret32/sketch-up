@@ -1,5 +1,3 @@
-'use client';
-
 import { Info } from './info';
 import { Participants } from './participants';
 import { Toolbar } from './toolbar';

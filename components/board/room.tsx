@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  ClientSideSuspense,
-  LiveblocksProvider,
-  RoomProvider,
-} from '@liveblocks/react/suspense';
-
-import { LIVEBLOCKS_PUBLIC_API_KEY } from '@/config';
+import { ClientSideSuspense, RoomProvider } from '@liveblocks/react/suspense';
 
 interface RoomProps {
   roomId: string;
@@ -16,10 +10,8 @@ interface RoomProps {
 
 export const Room = ({ roomId, fallback, children }: RoomProps) => {
   return (
-    <LiveblocksProvider publicApiKey={LIVEBLOCKS_PUBLIC_API_KEY}>
-      <RoomProvider id={roomId}>
-        <ClientSideSuspense fallback={fallback}>{children}</ClientSideSuspense>
-      </RoomProvider>
-    </LiveblocksProvider>
+    <RoomProvider id={roomId} initialPresence={{}}>
+      <ClientSideSuspense fallback={fallback}>{children}</ClientSideSuspense>
+    </RoomProvider>
   );
 };
