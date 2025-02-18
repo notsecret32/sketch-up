@@ -16,7 +16,7 @@ export const Providers = ({ children }: ProvidersProps) => {
     <ConvexClientProvider>
       <Toaster />
       <ModalProvider />
-      <LiveblocksProvider authEndpoint='/api/liveblocks-auth'>
+      <LiveblocksProvider authEndpoint='/api/liveblocks-auth' throttle={16}>
         {children}
       </LiveblocksProvider>
     </ConvexClientProvider>
