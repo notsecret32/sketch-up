@@ -12,7 +12,6 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       <Info boardId={boardId} />
       <Participants />
       <Toolbar />
-      {boardId}
     </div>
   );
 };
