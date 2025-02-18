@@ -1,8 +1,8 @@
 import { LoaderIcon } from 'lucide-react';
 
-import { Info } from './info';
-import { Participants } from './participants';
-import { Toolbar } from './toolbar';
+import { InfoSkeleton } from './info';
+import { ParticipantsSkeleton } from './participants';
+import { ToolbarSkeleton } from './toolbar';
 
 export const CanvasLoading = () => {
   return (
@@ -11,9 +11,9 @@ export const CanvasLoading = () => {
         className='animate-spin duration-700 text-neutral-400'
         size={48}
       />
-      <Info.Skeleton />
-      <Participants.Skeleton />
-      <Toolbar.Skeleton />
+      <InfoSkeleton />
+      <ParticipantsSkeleton />
+      <ToolbarSkeleton />
     </div>
   );
 };
