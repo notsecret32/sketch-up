@@ -19,7 +19,7 @@ export const Hint = ({
   label,
   side = 'right',
   sideOffset = 10,
-  align = 'start',
+  align = 'center',
   alignOffset,
   children,
 }: HintProps) => {
