@@ -81,6 +81,13 @@ export type NoteLayer = {
   value?: string;
 };
 
+export type Layer =
+  | RectangleLayer
+  | EllipseLayer
+  | PathLayer
+  | TextLayer
+  | NoteLayer;
+
 export type CanvasState =
   | {
       mode: 'none';
