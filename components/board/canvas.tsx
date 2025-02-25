@@ -90,11 +90,6 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     ({}, e: React.PointerEvent) => {
       const point = pointerEventToCanvasPoint(e, camera);
 
-      console.log({
-        point,
-        mode: canvasState.mode,
-      });
-
       if (canvasState.mode === 'inserting') {
         insertLayer(canvasState.layerType, point);
       }
@@ -108,9 +103,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
   const onPointerMove = useMutation(
     ({ setMyPresence }, e: React.PointerEvent) => {
       e.preventDefault();
-
       const cursor = pointerEventToCanvasPoint(e, camera);
-
       setMyPresence({ cursor });
     },
     []
